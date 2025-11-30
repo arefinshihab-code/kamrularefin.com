@@ -19,8 +19,8 @@ export const CONTENT: Record<Language, Content> = {
       ctaSecondary: "View Services",
     },
     process: {
-      title: "The Data Pipeline",
-      subtitle: "Visualizing how I bridge the gap between user behavior and your ROI.",
+      title: "From Clicks to Measures",
+      subtitle: "Visualizing the journey from raw user behavior to measurable ROI.",
       step1: "User Action",
       step2: "GTM Capture",
       step3: "Growth Insights",
@@ -155,7 +155,7 @@ export const CONTENT: Record<Language, Content> = {
       ctaSecondary: "Leistungen ansehen",
     },
     process: {
-      title: "Der Daten-Prozess",
+      title: "Von Klicks zu Messwerten",
       subtitle: "So schließe ich die Lücke zwischen Nutzerverhalten und Ihrem ROI.",
       step1: "Nutzeraktion",
       step2: "GTM Erfassung",

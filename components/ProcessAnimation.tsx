@@ -10,9 +10,13 @@ interface ProcessAnimationProps {
 export const ProcessAnimation: React.FC<ProcessAnimationProps> = ({ content }) => {
   return (
     <div className="w-full max-w-4xl mx-auto p-4 py-12">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold text-slate-800 dark:text-white mb-2">{content.title}</h2>
-        <p className="text-slate-500 dark:text-slate-400">{content.subtitle}</p>
+      <div className="text-center mb-16">
+        <h2 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-green-600 pb-1">
+          {content.title}
+        </h2>
+        <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+          {content.subtitle}
+        </p>
       </div>
 
       <div className="relative bg-slate-900 rounded-xl p-8 shadow-2xl overflow-hidden border border-slate-700">
@@ -42,12 +46,12 @@ export const ProcessAnimation: React.FC<ProcessAnimationProps> = ({ content }) =
                  <MousePointer2 className="w-6 h-6 text-white" />
                </motion.div>
             </div>
-            <p className="text-slate-300 font-semibold text-center">{content.step1}</p>
-            <div className="text-xs text-slate-500">Clicks, Scrolls, Views</div>
+            <p className="text-slate-300 font-semibold text-center text-lg">{content.step1}</p>
+            <div className="text-xs text-slate-500 uppercase tracking-wider font-medium">Clicks & Views</div>
           </div>
 
           {/* Connection Line 1 */}
-          <div className="hidden md:block absolute left-[25%] top-1/2 w-[16%] h-[2px] bg-slate-700 -translate-y-8">
+          <div className="hidden md:block absolute left-[25%] top-1/2 w-[16%] h-[2px] bg-slate-700 -translate-y-12">
             <motion.div 
               className="h-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.8)]"
               initial={{ width: "0%", left: 0 }}
@@ -74,12 +78,12 @@ export const ProcessAnimation: React.FC<ProcessAnimationProps> = ({ content }) =
                  transition={{ repeat: Infinity, duration: 1.5 }}
                />
             </div>
-            <p className="text-slate-300 font-semibold text-center">{content.step2}</p>
-            <div className="text-xs text-slate-500">Tags, Triggers, Variables</div>
+            <p className="text-slate-300 font-semibold text-center text-lg">{content.step2}</p>
+            <div className="text-xs text-slate-500 uppercase tracking-wider font-medium">Data Layer</div>
           </div>
 
           {/* Connection Line 2 */}
-          <div className="hidden md:block absolute right-[25%] top-1/2 w-[16%] h-[2px] bg-slate-700 -translate-y-8">
+          <div className="hidden md:block absolute right-[25%] top-1/2 w-[16%] h-[2px] bg-slate-700 -translate-y-12">
              <motion.div 
               className="h-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.8)]"
               initial={{ width: "0%", left: 0 }}
@@ -111,8 +115,8 @@ export const ProcessAnimation: React.FC<ProcessAnimationProps> = ({ content }) =
               <BarChart className="w-6 h-6 text-green-400" />
             </motion.div>
 
-            <p className="text-slate-300 font-semibold text-center">{content.step3}</p>
-            <div className="text-xs text-slate-500">GA4, Ads, Data Studio</div>
+            <p className="text-slate-300 font-semibold text-center text-lg">{content.step3}</p>
+            <div className="text-xs text-slate-500 uppercase tracking-wider font-medium">Business ROI</div>
           </div>
 
         </div>
