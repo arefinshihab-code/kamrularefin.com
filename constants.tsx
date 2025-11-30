@@ -109,12 +109,12 @@ export const CONTENT: Record<Language, Content> = {
       ],
       certificates: [
         {
-          title: "Meta Social Media Marketing",
+          title: "Meta Certified Digital Marketing Associate",
           subtitle: "Professional Certificate",
-          issuer: "Coursera & Meta",
-          date: "June 12, 2024",
-          url: "https://coursera.org/verify/professional-cert/JANWAWYKQFW6",
-          id: "JANWAWYKQFW6"
+          issuer: "Meta",
+          date: "2024",
+          url: "https://www.credly.com/badges/55f3d246-d514-4e5e-910c-9144db20d6f0/linked_in_profile",
+          id: "55f3d246"
         },
         {
           title: "Google Analytics Certification",
@@ -123,6 +123,14 @@ export const CONTENT: Record<Language, Content> = {
           date: "2024",
           url: "https://skillshop.credential.net/8b768b6c-b735-4a7d-8458-06476df1fa19#acc.LUKmD1Gy",
           id: "8b768b6c"
+        },
+        {
+          title: "Meta Social Media Marketing",
+          subtitle: "Professional Certificate",
+          issuer: "Coursera & Meta",
+          date: "June 12, 2024",
+          url: "https://coursera.org/verify/professional-cert/JANWAWYKQFW6",
+          id: "JANWAWYKQFW6"
         }
       ]
     },
@@ -245,12 +253,12 @@ export const CONTENT: Record<Language, Content> = {
       ],
       certificates: [
         {
-          title: "Meta Social Media Marketing",
+          title: "Meta Certified Digital Marketing Associate",
           subtitle: "Professional Certificate",
-          issuer: "Coursera & Meta",
-          date: "12. Juni 2024",
-          url: "https://coursera.org/verify/professional-cert/JANWAWYKQFW6",
-          id: "JANWAWYKQFW6"
+          issuer: "Meta",
+          date: "2024",
+          url: "https://www.credly.com/badges/55f3d246-d514-4e5e-910c-9144db20d6f0/linked_in_profile",
+          id: "55f3d246"
         },
         {
           title: "Google Analytics Certification",
@@ -259,6 +267,14 @@ export const CONTENT: Record<Language, Content> = {
           date: "2024",
           url: "https://skillshop.credential.net/8b768b6c-b735-4a7d-8458-06476df1fa19#acc.LUKmD1Gy",
           id: "8b768b6c"
+        },
+        {
+          title: "Meta Social Media Marketing",
+          subtitle: "Professional Certificate",
+          issuer: "Coursera & Meta",
+          date: "12. Juni 2024",
+          url: "https://coursera.org/verify/professional-cert/JANWAWYKQFW6",
+          id: "JANWAWYKQFW6"
         }
       ]
     },
