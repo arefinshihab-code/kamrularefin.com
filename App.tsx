@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Globe, ChevronRight, CheckCircle2, Mail, Linkedin, ArrowUpRight, Trophy, Award, ExternalLink, Phone, MapPin } from 'lucide-react';
+import { Menu, X, Globe, ChevronRight, CheckCircle2, Mail, Linkedin, ArrowUpRight, Trophy, Award, ExternalLink, Phone, MapPin, Loader2, Send } from 'lucide-react';
 import { CONTENT, Icons } from './constants';
 import { Language } from './types';
 import { ProcessAnimation } from './components/ProcessAnimation';
@@ -9,6 +9,9 @@ function App() {
   const [lang, setLang] = useState<Language>('de'); // Default to German for local target
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  
+  // Form handling state
+  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const t = CONTENT[lang];
 
@@ -29,6 +32,41 @@ function App() {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormStatus('submitting');
+    
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    
+    // -------------------------------------------------------------------------
+    // IMPORTANT: REPLACE THE URL BELOW WITH YOUR FORMSPREE ID
+    // 1. Go to https://formspree.io/
+    // 2. Create a new form
+    // 3. Replace 'INSERT_YOUR_FORMSPREE_ID_HERE' with your unique ID (e.g., xpqrzlqo)
+    // -------------------------------------------------------------------------
+    const FORMSPREE_ENDPOINT = "https://formspree.io/f/xovgjdbk"; 
+
+    try {
+        const response = await fetch(FORMSPREE_ENDPOINT, {
+            method: "POST",
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        if (response.ok) {
+            setFormStatus('success');
+            form.reset();
+        } else {
+            setFormStatus('error');
+        }
+    } catch (err) {
+        setFormStatus('error');
     }
   };
 
@@ -282,33 +320,98 @@ function App() {
               <p className="text-slate-500">{t.contact.subtitle}</p>
             </div>
 
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">
-                     {lang === 'en' ? 'Name' : 'Name'}
-                  </label>
-                  <input type="text" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" placeholder={t.contact.name} />
+            {formStatus === 'success' ? (
+              <div className="bg-green-50 border border-green-200 rounded-xl p-8 text-center animate-fade-in">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle2 className="w-8 h-8 text-green-600" />
                 </div>
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">
-                     {lang === 'en' ? 'Email' : 'E-Mail'}
-                  </label>
-                  <input type="email" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" placeholder={t.contact.email} />
+                <h3 className="text-xl font-bold text-green-800 mb-2">
+                  {lang === 'en' ? 'Message Sent!' : 'Nachricht gesendet!'}
+                </h3>
+                <p className="text-green-700">
+                  {lang === 'en' 
+                    ? 'Thanks for reaching out. I will get back to you shortly.' 
+                    : 'Danke für Ihre Nachricht. Ich werde mich in Kürze bei Ihnen melden.'}
+                </p>
+                <button 
+                  onClick={() => setFormStatus('idle')}
+                  className="mt-6 text-green-700 font-semibold hover:text-green-900 underline"
+                >
+                  {lang === 'en' ? 'Send another message' : 'Eine weitere Nachricht senden'}
+                </button>
+              </div>
+            ) : (
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-semibold text-slate-700 mb-2">
+                       {lang === 'en' ? 'Name' : 'Name'}
+                    </label>
+                    <input 
+                      type="text" 
+                      id="name"
+                      name="name" 
+                      required
+                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" 
+                      placeholder={t.contact.name} 
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-semibold text-slate-700 mb-2">
+                       {lang === 'en' ? 'Email' : 'E-Mail'}
+                    </label>
+                    <input 
+                      type="email" 
+                      id="email"
+                      name="email"
+                      required
+                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" 
+                      placeholder={t.contact.email} 
+                    />
+                  </div>
                 </div>
-              </div>
-              
-              <div>
-                 <label className="block text-sm font-semibold text-slate-700 mb-2">
-                    {lang === 'en' ? 'Message' : 'Nachricht'}
-                 </label>
-                 <textarea rows={4} className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" placeholder={t.contact.message}></textarea>
-              </div>
+                
+                <div>
+                   <label htmlFor="message" className="block text-sm font-semibold text-slate-700 mb-2">
+                      {lang === 'en' ? 'Message' : 'Nachricht'}
+                   </label>
+                   <textarea 
+                      id="message"
+                      name="message" 
+                      required
+                      rows={4} 
+                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" 
+                      placeholder={t.contact.message}
+                   ></textarea>
+                </div>
 
-              <button type="submit" className="w-full py-4 bg-slate-900 text-white rounded-lg font-bold text-lg hover:bg-slate-800 transition-colors shadow-lg">
-                {t.contact.submit}
-              </button>
-            </form>
+                {formStatus === 'error' && (
+                  <div className="text-red-600 text-sm text-center bg-red-50 p-3 rounded-lg border border-red-100">
+                     {lang === 'en' 
+                       ? 'Something went wrong. Please check your connection or try again later.' 
+                       : 'Etwas ist schiefgelaufen. Bitte überprüfen Sie Ihre Verbindung.'}
+                  </div>
+                )}
+
+                <button 
+                  type="submit" 
+                  disabled={formStatus === 'submitting'}
+                  className="w-full py-4 bg-slate-900 text-white rounded-lg font-bold text-lg hover:bg-slate-800 transition-colors shadow-lg flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  {formStatus === 'submitting' ? (
+                    <>
+                      <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                      {lang === 'en' ? 'Sending...' : 'Senden...'}
+                    </>
+                  ) : (
+                    <>
+                      {t.contact.submit}
+                      <Send className="w-5 h-5 ml-2" />
+                    </>
+                  )}
+                </button>
+              </form>
+            )}
 
             <div className="mt-8 flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6">
                <a href="https://www.linkedin.com/in/kamrularefin/" target="_blank" rel="noopener noreferrer" className="flex items-center text-slate-500 hover:text-blue-600 transition-colors">
